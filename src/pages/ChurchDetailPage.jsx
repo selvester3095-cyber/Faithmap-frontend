@@ -35,16 +35,19 @@ export default function ChurchDetailPage() {
 
   const mapsUrl = church.latitude && church.longitude
     ? `https://www.google.com/maps?q=${church.latitude},${church.longitude}`
-    : church.address ? `https://www.google.com/maps/search/${encodeURIComponent(church.address)}` : null
+    : church.address
+      ? `https://www.google.com/maps/search/${encodeURIComponent(church.address)}`
+      : null
 
   return (
     <div className="page-container max-w-3xl mx-auto">
       <button onClick={() => navigate('/')} className="flex items-center gap-1 text-sm text-slate-500 hover:text-brand-600 mb-6 transition-colors">
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/></svg>
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/>
+        </svg>
         Back to search
       </button>
 
-      {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-3 mb-6">
         <div>
           <h1 className="font-display text-3xl text-slate-900">{church.name}</h1>
@@ -59,7 +62,6 @@ export default function ChurchDetailPage() {
         {church.status === 'verified' && <span className="verified-badge">✓ Verified</span>}
       </div>
 
-      {/* Info Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <div className="card p-5">
           <h2 className="font-display text-lg mb-4 text-slate-800">About</h2>
@@ -105,13 +107,13 @@ export default function ChurchDetailPage() {
           {church.website && (
             <div>
               <p className="text-xs text-slate-400 uppercase tracking-wide mb-1">Website</p>
-              <a href={church.website} target="_blank" rel="noopener noreferrer" className="text-sm text-brand-600 hover:underline break-all">{church.website}</a>
+              <a href={church.website} target="_blank" rel="noopener noreferrer"
+                className="text-sm text-brand-600 hover:underline break-all">{church.website}</a>
             </div>
           )}
         </div>
       </div>
 
-      {/* Events */}
       {church.events && church.events.length > 0 && (
         <div>
           <h2 className="font-display text-2xl text-slate-800 mb-4">Upcoming Events</h2>
@@ -121,3 +123,31 @@ export default function ChurchDetailPage() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <h3 className="font-semibold text-slate-900">{event.title}</h3>
+                    {event.description && <p className="text-sm text-slate-600 mt-1">{event.description}</p>}
+                    <div className="mt-2 text-xs text-slate-500 space-y-1">
+                      {event.start_ts && <p>🗓 {new Date(event.start_ts).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}</p>}
+                      {event.venue && <p>📍 {event.venue}</p>}
+                      {event.refreshments && <p>🍽 Refreshments available</p>}
+                      {event.notes && <p>📝 {event.notes}</p>}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleInterest(event.id)}
+                    disabled={interested[event.id]}
+                    className={`shrink-0 px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                      interested[event.id]
+                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                        : 'btn-primary'
+                    }`}
+                  >
+                    {interested[event.id] ? '✓ Interested' : "I'm Interested"}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
