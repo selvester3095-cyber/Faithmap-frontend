@@ -22,8 +22,8 @@ export const churchLogin = (data) => api.post('/auth/church/login', data)
 // ── Admin ─────────────────────────────────────────────────
 export const getSubmittedChurches = (token, status = 'submitted') =>
   authApi(token).get(`/admin/churches?status=${status}`)
-export const verifyChurch = (token, id, email, password) =>
-  api.post(`/admin/verify/${id}?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&secret=FaithAdmin2026`)
+export const verifyChurch = (token, id) =>
+  api.post(`/admin/verify/${id}`)
 export const rejectChurch = (token, id) =>
   authApi(token).post(`/admin/churches/${id}/reject`)
 export const deleteChurch = (token, id) =>
