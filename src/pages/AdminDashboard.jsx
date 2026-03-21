@@ -33,18 +33,15 @@ export default function AdminDashboard() {
     setTimeout(() => setMessage(null), 3000)
   }
 
-  const handleVerify = async () => {
-    if (!verifyForm.email || !verifyForm.password) return
-    try {
-      await verifyChurch(token, verifyModal.id, verifyForm.email, verifyForm.password)
-      showMsg('success', `"${verifyModal.name}" verified!`)
-      setVerifyModal(null)
-      setVerifyForm({ email: '', password: '' })
-      fetchChurches()
-    } catch {
-      showMsg('error', 'Verification failed.')
-    }
+  const handleVerify = async (church) => {
+  try {
+    await verifyChurch(token, church.id)
+    showMsg('success', `"${church.name}" is now verified and live!`)
+    fetchChurches()
+  } catch {
+    showMsg('error', 'Verification failed.')
   }
+}
 
   const handleReject = async (church) => {
     if (!confirm(`Reject "${church.name}"?`)) return
