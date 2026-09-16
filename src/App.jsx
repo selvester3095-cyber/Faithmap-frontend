@@ -103,11 +103,11 @@ function PublicPortal({ token, setToken, setUser, setPortal }) {
   }, [filters])
 
   const fetchChurches = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/api/v1/churches`, {
-        params: { denomination: filters.denomination, distance_km: filters.distance }
-      })
-      setChurches(response.data)
+  try {
+    const response = await axios.get(`${API_URL}/api/v1/churches`, {
+      params: { denomination: filters.denomination, distance_km: filters.distance }
+    })
+    setChurches(Array.isArray(response.data) ? response.data : [])
     } catch (error) {
       console.error('Error fetching churches:', error)
     }
