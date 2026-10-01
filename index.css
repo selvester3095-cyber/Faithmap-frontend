@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    @apply h-full bg-white text-faith-navy-900;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold text-faith-navy-900;
+  }
+
+  h1 { @apply text-5xl; }
+  h2 { @apply text-3xl; }
+  h3 { @apply text-2xl; }
+  h4 { @apply text-xl; }
+  h5 { @apply text-lg; }
+  h6 { @apply text-base; }
+
+  button:focus-visible {
+    @apply outline-none ring-2 ring-faith-green-400 ring-offset-2;
+  }
+
+  input:focus-visible, select:focus-visible, textarea:focus-visible {
+    @apply outline-none ring-2 ring-faith-green-400 ring-offset-2;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-faith-green-400 text-white rounded-lg font-semibold text-sm transition-all duration-200 hover:bg-faith-green-600 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-faith-green-400 text-faith-green-400 rounded-lg font-semibold text-sm transition-all duration-200 hover:bg-faith-green-50 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-tertiary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-faith-green-400 font-semibold text-sm transition-all duration-200 hover:text-faith-green-600 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .card {
+    @apply bg-white rounded-lg p-6 shadow-sm border border-gray-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 border-2 border-gray-200 rounded-lg font-body text-base text-faith-navy-900 bg-white transition-all duration-200;
+  }
+
+  .input-field:focus {
+    @apply border-faith-green-400 ring-2 ring-faith-green-400 ring-opacity-20;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-faith-blue-50 border-2 border-transparent rounded-full text-sm font-semibold cursor-pointer text-faith-green-400 transition-all duration-200 hover:border-faith-green-400;
+  }
+
+  .chip.active {
+    @apply bg-faith-green-400 text-white border-faith-green-400;
+  }
+
+  .badge {
+    @apply inline-block px-3 py-1 bg-faith-blue-50 text-faith-green-400 rounded-md text-xs font-semibold;
+  }
+
+  .badge.verified {
+    @apply bg-green-50 text-green-600;
+  }
+
+  .event-card {
+    @apply bg-white rounded-lg p-6 border-l-4 border-faith-green-400 shadow-sm cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .church-card {
+    @apply bg-white rounded-lg p-6 shadow-sm border border-gray-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .sticky-header {
+    @apply sticky top-0 z-50 bg-white border-b border-gray-200;
+  }
+
+  .page-container {
+    @apply flex-1 overflow-y-auto pt-24 pb-8;
+  }
+
+  .loading-skeleton {
+    @apply bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse rounded;
+  }
+
+  .empty-state {
+    @apply flex flex-col items-center justify-center py-12 text-center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #78BDE8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #168F78;
+}
